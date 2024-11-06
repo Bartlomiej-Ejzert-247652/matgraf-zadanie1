@@ -2,6 +2,7 @@
 #define ZADANIE1_MATRIX4X4_H
 
 #include <string>
+#include "Vector.h"
 
 class Matrix4x4 {
 
@@ -29,6 +30,18 @@ public:
     void InvertMatrix();
     const Matrix4x4 operator*(const Matrix4x4 &mat) const;
     std::string print() const;
+
+    void SetTranslationPart(const Vector& translation);
+
+    void SetScale(const Vector& scaleFactor);
+
+    void SetUniformScale(const float scaleFactor);
+
+    void SetRotationAxis(const double angle, Vector axis);
+
+    void SetRotationX(const double angle);
+    void SetRotationY(const double angle);
+    void SetRotationZ(const double angle);
 
 };
 

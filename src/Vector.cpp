@@ -1,6 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include <cmath>
+#include <string>
 #include "Vector.h"
 
 // Getters for all 3 vector coordinates
@@ -95,12 +96,13 @@ float Vector::length() const {
     return std::sqrt(x * x + y * y + z * z);
 }
 
-void Vector::normalise() {
+Vector Vector::normalise() {
     float len = length();
     if (len != 0 ) {
         this -> x /= len;
         this -> y /= len;
         this -> z /= len;
+        std::cout << "bla bla" << std::endl;
     } else {
         std::cerr << "Cannot divide by 0!" << std::endl;
     }

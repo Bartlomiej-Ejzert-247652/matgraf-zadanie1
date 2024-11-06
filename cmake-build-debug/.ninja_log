@@ -1,5 +1,0 @@
-# ninja log v5
-1	99	7526273455597026	CMakeFiles/Zad1.dir/src/Matrix4x4.cpp.obj	cf72d6ec92eae812
-9	529	7526273459907058	CMakeFiles/Zad1.dir/src/main.cpp.obj	5f373e025860be3
-15	694	7526273461556774	CMakeFiles/Zad1.dir/src/Vector.cpp.obj	b0bea08650e00fb
-694	901	7526273463496360	Zad1.exe	6eb56c61bf8f697e

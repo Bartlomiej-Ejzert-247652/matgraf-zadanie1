@@ -1,6 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include <cmath>
+#include <string>
 #include "Vector.h"
 
 // Getters for all 3 vector coordinates

@@ -117,7 +117,7 @@ void Matrix4x4::SetTranslationPart(const Vector &translation) {
 }
 
 void Matrix4x4::SetScale(const Vector &scaleFactor) {
-    //LoadIdentity();
+    LoadIdentity();
 
     entries[0]=scaleFactor.getX();
     entries[5] = scaleFactor.getY();
@@ -125,7 +125,7 @@ void Matrix4x4::SetScale(const Vector &scaleFactor) {
 }
 
 void Matrix4x4::SetUniformScale(const float scaleFactor) {
-    //LoadIdentity();
+    LoadIdentity();
 
     entries[0] = entries[5] = entries[10] = scaleFactor;
 }

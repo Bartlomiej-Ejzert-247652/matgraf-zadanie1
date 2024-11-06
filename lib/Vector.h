@@ -1,6 +1,8 @@
 #ifndef ZAD1_VECTOR_H
 #define ZAD1_VECTOR_H
 
+#include <string>
+
 class Vector {
 private:
 

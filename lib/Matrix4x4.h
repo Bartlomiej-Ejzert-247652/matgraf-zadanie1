@@ -1,6 +1,8 @@
 #ifndef ZADANIE1_MATRIX4X4_H
 #define ZADANIE1_MATRIX4X4_H
 
+#include <string>
+
 class Matrix4x4 {
 
 public:
@@ -23,7 +25,10 @@ public:
     const Matrix4x4 operator+(const Matrix4x4 &mat) const;
 
     void LoadIdentity();
+    void SetMatrixAsInvertedOfGivenMatrix(const Matrix4x4 &mat);
+    void InvertMatrix();
     const Matrix4x4 operator*(const Matrix4x4 &mat) const;
+    std::string print() const;
 
 };
 

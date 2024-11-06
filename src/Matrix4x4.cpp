@@ -1,6 +1,8 @@
 #include <cstring>
 #include <cstdio>
 #include "Matrix4x4.h"
+#include <algorithm>
+#include <cmath>
 
 Matrix4x4::Matrix4x4(float e0, float e1, float e2, float e3,
                      float e4, float e5, float e6, float e7,
@@ -108,4 +110,80 @@ const Matrix4x4 Matrix4x4::operator*(const Matrix4x4 &mat) const {
 
     }
 
+}
+
+void Matrix4x4::SetMatrixAsInvertedOfGivenMatrix(const Matrix4x4 &mat) {
+    Matrix4x4 augmented = mat;
+    LoadIdentity();  // Ustawiamy bieżącą macierz jako jednostkową (będzie służyła jako prawa strona)
+
+    // Algorytm Gaussa-Jordana
+    for (int i = 0; i < 4; ++i) {
+        // Znajdź maksymalny element w kolumnie do stabilizacji numerycznej
+        int maxRow = i;
+        for (int k = i + 1; k < 4; ++k) {
+            if (std::fabs(augmented.entries[k * 4 + i]) > std::fabs(augmented.entries[maxRow * 4 + i])) {
+                maxRow = k;
+            }
+        }
+
+        // Zamień wiersze, jeśli to konieczne
+        if (i != maxRow) {
+            for (int j = 0; j < 4; ++j) {
+                std::swap(augmented.entries[i * 4 + j], augmented.entries[maxRow * 4 + j]);
+                std::swap(entries[i * 4 + j], entries[maxRow * 4 + j]);
+            }
+        }
+
+        // Sprawdzenie, czy element główny jest różny od zera
+        float pivot = augmented.entries[i * 4 + i];
+        if (std::fabs(pivot) < 1e-9) {
+            //std::cerr << "Macierz jest osobliwa i nie ma odwrotności." << std::endl;
+            return;
+        }
+
+        // Normalizacja wiersza
+        for (int j = 0; j < 4; ++j) {
+            augmented.entries[i * 4 + j] /= pivot;
+            entries[i * 4 + j] /= pivot;
+        }
+
+        // Wyzerowanie elementów w innych wierszach
+        for (int k = 0; k < 4; ++k) {
+            if (k != i) {
+                float factor = augmented.entries[k * 4 + i];
+                for (int j = 0; j < 4; ++j) {
+                    augmented.entries[k * 4 + j] -= factor * augmented.entries[i * 4 + j];
+                    entries[k * 4 + j] -= factor * entries[i * 4 + j];
+                }
+            }
+        }
+    }
+}
+
+void Matrix4x4::InvertMatrix() {
+    SetMatrixAsInvertedOfGivenMatrix(*this);
+}
+
+std::string Matrix4x4::print() const {
+    std::string s = "[ [";
+    s += std::to_string(entries[0]) + ", ";
+    s += std::to_string(entries[1]) + ", ";
+    s += std::to_string(entries[2]) + ", ";
+    s += std::to_string(entries[3]) + "] \n";
+    s += " [";
+    s += std::to_string(entries[4]) + ", ";
+    s += std::to_string(entries[5]) + ", ";
+    s += std::to_string(entries[6]) + ", ";
+    s += std::to_string(entries[7]) + "] \n";
+    s += " [";
+    s += std::to_string(entries[8]) + ", ";
+    s += std::to_string(entries[9]) + ", ";
+    s += std::to_string(entries[10]) + ", ";
+    s += std::to_string(entries[11]) + "] \n";
+    s += " [";
+    s += std::to_string(entries[12]) + ", ";
+    s += std::to_string(entries[13]) + ", ";
+    s += std::to_string(entries[14]) + ", ";
+    s += std::to_string(entries[15]) + "] ]";
+    return s;
 }

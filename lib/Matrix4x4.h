@@ -23,6 +23,8 @@ public:
     const Matrix4x4 operator+(const Matrix4x4 &mat) const;
 
     void LoadIdentity();
+    const Matrix4x4 operator*(const Matrix4x4 &mat) const;
+
 };
 
 #endif //ZADANIE1_MATRIX4X4_H

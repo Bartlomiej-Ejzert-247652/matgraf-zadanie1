@@ -1,6 +1,8 @@
 #ifndef ZADANIE1_MATRIX4X4_H
 #define ZADANIE1_MATRIX4X4_H
 
+#include "Vector.h"
+
 class Matrix4x4 {
 
 public:
@@ -24,6 +26,12 @@ public:
 
     void LoadIdentity();
     const Matrix4x4 operator*(const Matrix4x4 &mat) const;
+
+    void SetTranslationPart(const Vector& translation);
+
+    void SetScale(const Vector& scaleFactor);
+
+    void SetUniformScale(const float scaleFactor);
 
 };
 

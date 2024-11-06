@@ -109,3 +109,23 @@ const Matrix4x4 Matrix4x4::operator*(const Matrix4x4 &mat) const {
     }
 
 }
+
+void Matrix4x4::SetTranslationPart(const Vector &translation) {
+    entries[12] = translation.getX();
+    entries[13] = translation.getY();
+    entries[14] = translation.getZ();
+}
+
+void Matrix4x4::SetScale(const Vector &scaleFactor) {
+    //LoadIdentity();
+
+    entries[0]=scaleFactor.getX();
+    entries[5] = scaleFactor.getY();
+    entries[10] = scaleFactor.getZ();
+}
+
+void Matrix4x4::SetUniformScale(const float scaleFactor) {
+    //LoadIdentity();
+
+    entries[0] = entries[5] = entries[10] = scaleFactor;
+}

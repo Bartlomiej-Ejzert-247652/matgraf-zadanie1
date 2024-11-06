@@ -51,3 +51,23 @@ const Matrix4x4 Matrix4x4::operator+(const Matrix4x4 &mat) const {
                      entries[14] + mat.entries[14],
                      entries[15] + mat.entries[15]);
 }
+
+const Matrix4x4 Matrix4x4::operator*(const float c) const {
+    return Matrix4x4(entries[0] * c,
+                     entries[1] * c,
+                     entries[2] * c,
+                     entries[3] * c,
+                     entries[4] * c,
+                     entries[5] * c,
+                     entries[6] * c,
+                     entries[7] * c,
+                     entries[8] * c,
+                     entries[9] * c,
+                     entries[10] * c,
+                     entries[11] * c,
+                     entries[12] * c,
+                     entries[13] * c,
+                     entries[14] * c,
+                     entries[15] * c
+    );
+}

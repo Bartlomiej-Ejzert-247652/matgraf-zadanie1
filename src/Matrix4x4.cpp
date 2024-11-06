@@ -155,12 +155,30 @@ void Matrix4x4::SetRotationAxis(const double angle, Vector axis) {
 
 void Matrix4x4::SetRotationX(const double angle) {
     LoadIdentity();
+
+    entries[5] = (float)cos(M_PI*angle/180);
+    entries[6] = (float)sin(M_PI*angle/180);
+
+    entries[9] = -entries[6];
+    entries[10] = entries[5];
 }
 
 void Matrix4x4::SetRotationY(const double angle) {
     LoadIdentity();
+
+    entries[0] = (float)cos(M_PI*angle/180);
+    entries[2] = -(float)sin(M_PI*angle/180);
+
+    entries[8] = -entries[2];
+    entries[10] = entries[0];
 }
 
 void Matrix4x4::SetRotationZ(const double angle) {
     LoadIdentity();
+
+    entries[0] = (float)cos(M_PI*angle/180);
+    entries[1] = (float)sin(M_PI*angle/180);
+
+    entries[4] = -entries[1];
+    entries[5] = entries[0];
 }

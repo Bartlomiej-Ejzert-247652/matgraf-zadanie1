@@ -1,4 +1,5 @@
 #include <cstring>
+#include <cstdio>
 #include "Matrix4x4.h"
 
 Matrix4x4::Matrix4x4(float e0, float e1, float e2, float e3,
@@ -71,3 +72,13 @@ const Matrix4x4 Matrix4x4::operator*(const float c) const {
                      entries[15] * c
     );
 }
+
+void Matrix4x4::LoadIdentity() {
+    memset(entries, 0, 16 * sizeof(float));
+    entries[0] = 1.0;
+    entries[5] = 1.0;
+    entries[10] = 1.0;
+    entries[15] = 1.0;
+}
+
+

@@ -9,6 +9,7 @@ private:
 public:
 
     Vector(float x, float y, float z);
+    Vector(float x, float y);
 
     float getX() const;
     float getY() const;

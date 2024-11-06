@@ -56,6 +56,13 @@ build CMakeFiles/Zad1.dir/src/main.cpp.obj: CXX_COMPILER__Zad1_unscanned_Debug C
   OBJECT_DIR = CMakeFiles\Zad1.dir
   OBJECT_FILE_DIR = CMakeFiles\Zad1.dir\src
 
+build CMakeFiles/Zad1.dir/src/Matrix4x4.cpp.obj: CXX_COMPILER__Zad1_unscanned_Debug C$:/Users/barte/Desktop/Studia/5-semestr/mat-graf/zadanie1/src/Matrix4x4.cpp || cmake_object_order_depends_target_Zad1
+  DEP_FILE = CMakeFiles\Zad1.dir\src\Matrix4x4.cpp.obj.d
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/barte/Desktop/Studia/5-semestr/mat-graf/zadanie1/lib
+  OBJECT_DIR = CMakeFiles\Zad1.dir
+  OBJECT_FILE_DIR = CMakeFiles\Zad1.dir\src
+
 build CMakeFiles/Zad1.dir/src/Vector.cpp.obj: CXX_COMPILER__Zad1_unscanned_Debug C$:/Users/barte/Desktop/Studia/5-semestr/mat-graf/zadanie1/src/Vector.cpp || cmake_object_order_depends_target_Zad1
   DEP_FILE = CMakeFiles\Zad1.dir\src\Vector.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
@@ -71,7 +78,7 @@ build CMakeFiles/Zad1.dir/src/Vector.cpp.obj: CXX_COMPILER__Zad1_unscanned_Debug
 #############################################
 # Link the executable Zad1.exe
 
-build Zad1.exe: CXX_EXECUTABLE_LINKER__Zad1_Debug CMakeFiles/Zad1.dir/src/main.cpp.obj CMakeFiles/Zad1.dir/src/Vector.cpp.obj
+build Zad1.exe: CXX_EXECUTABLE_LINKER__Zad1_Debug CMakeFiles/Zad1.dir/src/main.cpp.obj CMakeFiles/Zad1.dir/src/Matrix4x4.cpp.obj CMakeFiles/Zad1.dir/src/Vector.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Zad1.dir

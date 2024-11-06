@@ -6,16 +6,18 @@
 class Vector {
 private:
 
-    float x, y, z;
+    float x, y, z, w;
 
 public:
 
+    Vector(float x, float y, float z, float w);
     Vector(float x, float y, float z);
     Vector(float x, float y);
 
     float getX() const;
     float getY() const;
     float getZ() const;
+    float getW() const;
 
     void operator+=(const Vector &v);
     void operator-=(const Vector &v);
@@ -25,7 +27,7 @@ public:
     float dotProduct(const Vector &v) const;
     Vector crossProduct(const Vector &v) const;
     float length() const;
-    Vector normalise();
+    void normalise();
 
     float angleRad(Vector &v) const;
     float angleDegrees(Vector &v) const;

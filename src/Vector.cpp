@@ -18,7 +18,18 @@ float Vector::getZ() const {
     return z;
 }
 
+float Vector::getW() const {
+    return w;
+}
+
 // Constructor
+
+Vector::Vector(float x, float y, float z, float w) {
+    this -> x = x;
+    this -> y = y;
+    this -> z = z;
+    this -> w = w;
+}
 
 Vector::Vector(float x, float y, float z) {
     this -> x = x;
@@ -68,7 +79,8 @@ std::string Vector::print() const {
     std::string s = "[ ";
     s += std::to_string(x) + ", ";
     s += std::to_string(y) + ", ";
-    s += std::to_string(z) + "]";
+    s += std::to_string(z) + ", ";
+    s += std::to_string(w) + "]";
     return s;
 }
 
@@ -96,13 +108,12 @@ float Vector::length() const {
     return std::sqrt(x * x + y * y + z * z);
 }
 
-Vector Vector::normalise() {
+void Vector::normalise() {
     float len = length();
     if (len != 0 ) {
-        this -> x /= len;
-        this -> y /= len;
-        this -> z /= len;
-        std::cout << "bla bla" << std::endl;
+         x /= len;
+         y /= len;
+         z /= len;
     } else {
         std::cerr << "Cannot divide by 0!" << std::endl;
     }

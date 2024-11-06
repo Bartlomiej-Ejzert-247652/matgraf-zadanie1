@@ -7,7 +7,7 @@
 class Matrix4x4 {
 
 public:
-    float entries[16];
+    float entries[16] = {0};
 
     Matrix4x4() {}
 
@@ -24,11 +24,13 @@ public:
 
     const Matrix4x4 operator*(const float c) const;
     const Matrix4x4 operator+(const Matrix4x4 &mat) const;
-
+    Vector operator*(const Vector &v) const;
     void LoadIdentity();
     void SetMatrixAsInvertedOfGivenMatrix(const Matrix4x4 &mat);
     void InvertMatrix();
-    const Matrix4x4 operator*(const Matrix4x4 &mat) const;
+    Matrix4x4 Transpose() const;
+    void SetTransposeOfGivenMatrix(const Matrix4x4 &mat);
+    Matrix4x4 operator*(const Matrix4x4 &mat) const;
     std::string print() const;
 
     void SetTranslationPart(const Vector& translation);

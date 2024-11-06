@@ -85,7 +85,7 @@ void Matrix4x4::LoadIdentity() {
 }
 
 
-const Matrix4x4 Matrix4x4::operator*(const Matrix4x4 &mat) const {
+Matrix4x4 Matrix4x4::operator*(const Matrix4x4 &mat) const {
     if (entries[3] == 0.0f && entries[7] == 0.0f && entries[11] == 0.0f && entries[15] == 1.0f &&
         mat.entries[3] == 0.0f && mat.entries[7] == 0.0f && mat.entries[11] == 0.0f && mat.entries[15] == 1.0f) {
 
@@ -110,7 +110,27 @@ const Matrix4x4 Matrix4x4::operator*(const Matrix4x4 &mat) const {
                          1.0f);
 
     }
+    return Matrix4x4(
+            entries[0] * mat.entries[0] + entries[4] * mat.entries[1] + entries[8] * mat.entries[2] + entries[12] * mat.entries[3],
+            entries[1] * mat.entries[0] + entries[5] * mat.entries[1] + entries[9] * mat.entries[2] + entries[13] * mat.entries[3],
+            entries[2] * mat.entries[0] + entries[6] * mat.entries[1] + entries[10] * mat.entries[2] + entries[14] * mat.entries[3],
+            entries[3] * mat.entries[0] + entries[7] * mat.entries[1] + entries[11] * mat.entries[2] + entries[15] * mat.entries[3],
 
+            entries[0] * mat.entries[4] + entries[4] * mat.entries[5] + entries[8] * mat.entries[6] + entries[12] * mat.entries[7],
+            entries[1] * mat.entries[4] + entries[5] * mat.entries[5] + entries[9] * mat.entries[6] + entries[13] * mat.entries[7],
+            entries[2] * mat.entries[4] + entries[6] * mat.entries[5] + entries[10] * mat.entries[6] + entries[14] * mat.entries[7],
+            entries[3] * mat.entries[4] + entries[7] * mat.entries[5] + entries[11] * mat.entries[6] + entries[15] * mat.entries[7],
+
+            entries[0] * mat.entries[8] + entries[4] * mat.entries[9] + entries[8] * mat.entries[10] + entries[12] * mat.entries[11],
+            entries[1] * mat.entries[8] + entries[5] * mat.entries[9] + entries[9] * mat.entries[10] + entries[13] * mat.entries[11],
+            entries[2] * mat.entries[8] + entries[6] * mat.entries[9] + entries[10] * mat.entries[10] + entries[14] * mat.entries[11],
+            entries[3] * mat.entries[8] + entries[7] * mat.entries[9] + entries[11] * mat.entries[10] + entries[15] * mat.entries[11],
+
+            entries[0] * mat.entries[12] + entries[4] * mat.entries[13] + entries[8] * mat.entries[14] + entries[12] * mat.entries[15],
+            entries[1] * mat.entries[12] + entries[5] * mat.entries[13] + entries[9] * mat.entries[14] + entries[13] * mat.entries[15],
+            entries[2] * mat.entries[12] + entries[6] * mat.entries[13] + entries[10] * mat.entries[14] + entries[14] * mat.entries[15],
+            entries[3] * mat.entries[12] + entries[7] * mat.entries[13] + entries[11] * mat.entries[14] + entries[15] * mat.entries[15]
+    );
 }
 
 void Matrix4x4::SetMatrixAsInvertedOfGivenMatrix(const Matrix4x4 &mat) {
@@ -138,7 +158,6 @@ void Matrix4x4::SetMatrixAsInvertedOfGivenMatrix(const Matrix4x4 &mat) {
         // Sprawdzenie, czy element główny jest różny od zera
         float pivot = augmented.entries[i * 4 + i];
         if (std::fabs(pivot) < 1e-9) {
-            //std::cerr << "Macierz jest osobliwa i nie ma odwrotności." << std::endl;
             return;
         }
 
@@ -211,7 +230,9 @@ void Matrix4x4::SetUniformScale(const float scaleFactor) {
 }
 
 void Matrix4x4::SetRotationAxis(const double angle, Vector axis) {
-    Vector u = axis.normalise();
+    axis.normalise();
+
+    Vector u = axis;
 
     float sinAngle=(float)sin(M_PI*angle/180);
     float cosAngle = (float) cos(M_PI*angle/180);
@@ -260,4 +281,44 @@ void Matrix4x4::SetRotationZ(const double angle) {
 
     entries[4] = -entries[1];
     entries[5] = entries[0];
+}
+
+Matrix4x4 Matrix4x4::Transpose() const {
+    Matrix4x4 result;
+//    = Matrix4x4(0, 0, 0, 0,
+//                                 0, 0, 0, 0,
+//                                 0, 0, 0, 0,
+//                                 0, 0, 0, 0);
+    result.SetTransposeOfGivenMatrix(*this);
+    return result;
+}
+
+void Matrix4x4::SetTransposeOfGivenMatrix(const Matrix4x4& mat) {
+    entries[0] = mat.entries[0];
+    entries[1] = mat.entries[4];
+    entries[2] = mat.entries[8];
+    entries[3] = mat.entries[12];
+    entries[4] = mat.entries[1];
+    entries[5] = mat.entries[5];
+    entries[6] = mat.entries[9];
+    entries[7] = mat.entries[13];
+    entries[8] = mat.entries[2];
+    entries[9] = mat.entries[6];
+    entries[10] = mat.entries[10];
+    entries[11] = mat.entries[14];
+    entries[12] = mat.entries[3];
+    entries[13] = mat.entries[7];
+    entries[14] = mat.entries[11];
+    entries[15] = mat.entries[15];
+}
+
+
+Vector Matrix4x4::operator*(const Vector &v) const {
+    // Mnożenie macierzy przez wektor 4D
+    float x = entries[0] * v.getX() + entries[4] * v.getY() + entries[8] * v.getZ() + entries[12] * v.getW();
+    float y = entries[1] * v.getX() + entries[5] * v.getY() + entries[9] * v.getZ() + entries[13] * v.getW();
+    float z = entries[2] * v.getX() + entries[6] * v.getY() + entries[10] * v.getZ() + entries[14] * v.getW();
+    float w = entries[3] * v.getX() + entries[7] * v.getY() + entries[11] * v.getZ() + entries[15] * v.getW();
+
+    return Vector(x, y, z, w);  // Zwracamy nowy wektor 4D
 }

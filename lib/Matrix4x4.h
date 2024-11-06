@@ -38,6 +38,7 @@ public:
                          entries[15] * c
                 );
     }
+    const Matrix4x4 operator+(const Matrix4x4 &mat) const;
 
 };
 

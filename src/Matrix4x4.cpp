@@ -32,3 +32,22 @@ Matrix4x4::Matrix4x4(const float *f) {
 Matrix4x4::Matrix4x4(const Matrix4x4 &mat) {
     memcpy(entries, mat.entries, 16*sizeof(float));
 }
+
+const Matrix4x4 Matrix4x4::operator+(const Matrix4x4 &mat) const {
+    return Matrix4x4(entries[0] + mat.entries[0],
+                     entries[1] + mat.entries[1],
+                     entries[2] + mat.entries[2],
+                     entries[3] + mat.entries[3],
+                     entries[4] + mat.entries[4],
+                     entries[5] + mat.entries[5],
+                     entries[6] + mat.entries[6],
+                     entries[7] + mat.entries[7],
+                     entries[8] + mat.entries[8],
+                     entries[9] + mat.entries[9],
+                     entries[10] + mat.entries[10],
+                     entries[11] + mat.entries[11],
+                     entries[12] + mat.entries[12],
+                     entries[13] + mat.entries[13],
+                     entries[14] + mat.entries[14],
+                     entries[15] + mat.entries[15]);
+}

@@ -25,6 +25,12 @@ Vector::Vector(float x, float y, float z) {
     this -> z = z;
 }
 
+Vector::Vector(float x, float y) {
+    this -> x = x;
+    this -> y = y;
+    this -> z = 0;
+}
+
 // Addition, subtraction, multiplication and division operators
 
 void Vector::operator+=(const Vector &v) {

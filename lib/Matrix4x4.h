@@ -19,6 +19,8 @@ public:
 
     ~Matrix4x4() {}
 
+    const Matrix4x4 operator+(const Matrix4x4 &mat) const;
+
 };
 
 #endif //ZADANIE1_MATRIX4X4_H

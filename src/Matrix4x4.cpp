@@ -52,6 +52,7 @@ const Matrix4x4 Matrix4x4::operator+(const Matrix4x4 &mat) const {
                      entries[15] + mat.entries[15]);
 }
 
+<<<<<<< Updated upstream
 const Matrix4x4 Matrix4x4::operator*(const float c) const {
     return Matrix4x4(entries[0] * c,
                      entries[1] * c,
@@ -70,4 +71,27 @@ const Matrix4x4 Matrix4x4::operator*(const float c) const {
                      entries[14] * c,
                      entries[15] * c
     );
+=======
+const Matrix4x4 Matrix4x4::operator*(const Matrix4x4 &mat) const {
+    if(entries[3]==0.0f && entries[7]==0.0f && entries[11]==0.0f && entries[15]==1.0f && mat.entries[3]==0.0f && mat.entries[7]==0.0f && mat.entries[11]==0.0f && mat.entries[15]==1.0f) {
+
+        return Matrix4x4(entries[0]*mat.entries[0] + entries[4] * mat.entries[1] + entries[8]*mat.entries[2],
+                         entries[1]*mat.entries[0] + entries[5]*mat.entries[1] + entries[9]*mat.entries[2],
+                         entries[2]*mat.entries[0] + entries[6]*mat.entries[1] + entries[10]*mat.entries[2],
+                         0.0f,
+                         entries[0]*mat.entries[4] + entries[4]*mat.entries[5] + entries[8]*mat.entries[6],
+                         entries[1]*mat.entries[4] + entries[5]*mat.entries[5] + entries[9]*mat.entries[6],
+                         entries[2]*mat.entries[4] + entries[6]*mat.entries[5] + entries[10]*mat.entries[6],
+                         0.0f,
+                         entries[0]*mat.entries[8] + entries[4]*mat.entries[9] + entries[8]*mat.entries[10],
+                         entries[1]*mat.entries[8] + entries[5]*mat.entries[9] + entries[9]*mat.entries[10],
+                         entries[2]*mat.entries[8] + entries[6]*mat.entries[9] + entries[10]*mat.entries[10],
+                         0.0f,
+                         entries[0]*mat.entries[12] + entries[4]*mat.entries[13] + entries[8]*mat.entries[14] + entries[12],
+                         entries[1]*mat.entries[12] + entries[5]*mat.entries[13] + entries[9]*mat.entries[14] + entries[13],
+                         entries[2]*mat.entries[12] + entries[6]*mat.entries[13] + entries[10]*mat.entries[14] + entries[14],
+                         1.0f);
+
+    }
+>>>>>>> Stashed changes
 }

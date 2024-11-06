@@ -1,5 +1,6 @@
 #include <cstring>
 #include <cstdio>
+#include <cmath>
 #include "Matrix4x4.h"
 
 Matrix4x4::Matrix4x4(float e0, float e1, float e2, float e3,
@@ -128,4 +129,38 @@ void Matrix4x4::SetUniformScale(const float scaleFactor) {
     LoadIdentity();
 
     entries[0] = entries[5] = entries[10] = scaleFactor;
+}
+
+void Matrix4x4::SetRotationAxis(const double angle, Vector axis) {
+    Vector u = axis.normalise();
+
+    float sinAngle=(float)sin(M_PI*angle/180);
+    float cosAngle = (float) cos(M_PI*angle/180);
+    float oneMinusCosAngle = 1.0f-cosAngle;
+
+    LoadIdentity();
+
+    entries[0]=(u.getX()) * (u.getX()) + cosAngle*(1-(u.getX())*(u.getX()));
+    entries[4]=(u.getX()) * (u.getY()) * (oneMinusCosAngle) - sinAngle*u.getZ();
+    entries[8] = (u.getX()) * (u.getZ()) * (oneMinusCosAngle) + sinAngle * u.getY();
+
+    entries[1] = (u.getX()) * (u.getY()) * (oneMinusCosAngle) + sinAngle*u.getZ();
+    entries[5] = (u.getY()) * (u.getY()) + cosAngle*(1-(u.getY())*(u.getY()));
+    entries[9] = (u.getY()) * (u.getZ()) * (oneMinusCosAngle) - sinAngle*u.getX();
+
+    entries[2] = (u.getX()) * (u.getZ()) * (oneMinusCosAngle) - sinAngle*u.getY();
+    entries[6] = (u.getY()) * (u.getZ()) * (oneMinusCosAngle) + sinAngle*u.getX();
+    entries[10] = (u.getZ()) * (u.getZ()) + cosAngle*(1-(u.getZ())*(u.getZ()));
+}
+
+void Matrix4x4::SetRotationX(const double angle) {
+    LoadIdentity();
+}
+
+void Matrix4x4::SetRotationY(const double angle) {
+    LoadIdentity();
+}
+
+void Matrix4x4::SetRotationZ(const double angle) {
+    LoadIdentity();
 }

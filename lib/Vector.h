@@ -25,7 +25,7 @@ public:
     float dotProduct(const Vector &v) const;
     Vector crossProduct(const Vector &v) const;
     float length() const;
-    void normalise();
+    Vector normalise();
 
     float angleRad(Vector &v) const;
     float angleDegrees(Vector &v) const;

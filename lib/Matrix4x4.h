@@ -33,6 +33,12 @@ public:
 
     void SetUniformScale(const float scaleFactor);
 
+    void SetRotationAxis(const double angle, Vector axis);
+
+    void SetRotationX(const double angle);
+    void SetRotationY(const double angle);
+    void SetRotationZ(const double angle);
+
 };
 
 #endif //ZADANIE1_MATRIX4X4_H

@@ -96,7 +96,7 @@ float Vector::length() const {
     return std::sqrt(x * x + y * y + z * z);
 }
 
-void Vector::normalise() {
+Vector Vector::normalise() {
     float len = length();
     if (len != 0 ) {
         this -> x /= len;

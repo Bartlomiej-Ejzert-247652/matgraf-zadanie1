@@ -45,6 +45,8 @@ int main() {
                             1, 1, 1, -1,
                             1, 0, -2, -6);
 
+    cout<<m.determinant();
+
     cout << m.print() << endl;
 
     cout << endl;
@@ -67,35 +69,37 @@ int main() {
 
     cout << m1.print() << endl;
     cout << m2.print() << endl;
-    cout << m3.print() << endl;
+    cout << "m1 + m2" << endl << m3.print() << endl;
 
     float c = 2.0;
 
     m2 = m3 * c;
 
-    cout << m2.print() << endl;
+    cout << "m2 * 2 " << endl << m2.print() << endl;
 
     m3.LoadIdentity();
 
     Matrix4x4 m4 = m2 * m3;
 
-    cout << m4.print() << endl;
+    cout << "m2 * m3" << endl << m4.print() << endl;
 
     Matrix4x4 m5 = Matrix4x4(1, 2, 3, 4,
                              0, 0, 0, 0,
                              0, 0, 0, 0,
                              0, 0, 0, 0);
 
-    m3 = m5.Transpose();
 
-    cout << m3.print() << endl;
+    cout << endl;
+    cout << "m5: " << endl << m5.print() << endl;
+    m3 = m5.Transpose();
+    cout << "transpozycja" << endl << m3.print() << endl;
 
     Vector v = Vector(1, 0, 0, 1);
 
     m5.SetRotationY(90);
     Vector vO = m5 * v;
 
-    cout << vO.print() << endl;
+    cout << "Wektor obrocony o 90 wzgledem osi Y " << endl << vO.print() << endl;
 
     m5 = Matrix4x4(1, 2, 3, 4,
                    0, 0, 0, 0,
@@ -109,8 +113,8 @@ int main() {
 
     Matrix4x4 m7 = m5 * m6;
     Matrix4x4 m8 = m6 * m5;
-    cout << m7.print() << endl;
-    cout << m8.print() << endl;
+    cout << "m5 * m6 " << endl << m7.print() << endl;
+    cout << "m6 * m5 " << endl << m8.print() << endl;
 
     return 0;
 }

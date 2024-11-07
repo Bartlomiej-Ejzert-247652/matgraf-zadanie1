@@ -135,7 +135,7 @@ Matrix4x4 Matrix4x4::operator*(const Matrix4x4 &mat) const {
 
 void Matrix4x4::SetMatrixAsInvertedOfGivenMatrix(const Matrix4x4 &mat) {
     Matrix4x4 augmented = mat;
-    LoadIdentity();  // Ustawiamy bieżącą macierz jako jednostkową (będzie służyła jako prawa strona)
+    LoadIdentity();
 
     // Algorytm Gaussa-Jordana
     for (int i = 0; i < 4; ++i) {
@@ -180,8 +180,98 @@ void Matrix4x4::SetMatrixAsInvertedOfGivenMatrix(const Matrix4x4 &mat) {
     }
 }
 
+float determinant3x3(float a11, float a12, float a13,
+                     float a21, float a22, float a23,
+                     float a31, float a32, float a33) {
+    return a11 * (a22 * a33 - a23 * a32)
+           - a12 * (a21 * a33 - a23 * a31)
+           + a13 * (a21 * a32 - a22 * a31);
+}
+
+Matrix4x4 Matrix4x4::cofactor() const {
+    Matrix4x4 cof;
+    cof.entries[0]  =  determinant3x3(entries[5],  entries[6],  entries[7],
+                                      entries[9],  entries[10], entries[11],
+                                      entries[13], entries[14], entries[15]);
+    cof.entries[1]  = -determinant3x3(entries[4],  entries[6],  entries[7],
+                                      entries[8],  entries[10], entries[11],
+                                      entries[12], entries[14], entries[15]);
+    cof.entries[2]  =  determinant3x3(entries[4],  entries[5],  entries[7],
+                                      entries[8],  entries[9],  entries[11],
+                                      entries[12], entries[13], entries[15]);
+    cof.entries[3]  = -determinant3x3(entries[4],  entries[5],  entries[6],
+                                      entries[8],  entries[9],  entries[10],
+                                      entries[12], entries[13], entries[14]);
+
+    cof.entries[4]  = -determinant3x3(entries[1],  entries[2],  entries[3],
+                                      entries[9],  entries[10], entries[11],
+                                      entries[13], entries[14], entries[15]);
+    cof.entries[5]  =  determinant3x3(entries[0],  entries[2],  entries[3],
+                                      entries[8],  entries[10], entries[11],
+                                      entries[12], entries[14], entries[15]);
+    cof.entries[6]  = -determinant3x3(entries[0],  entries[1],  entries[3],
+                                      entries[8],  entries[9],  entries[11],
+                                      entries[12], entries[13], entries[15]);
+    cof.entries[7]  =  determinant3x3(entries[0],  entries[1],  entries[2],
+                                      entries[8],  entries[9],  entries[10],
+                                      entries[12], entries[13], entries[14]);
+
+    cof.entries[8]  =  determinant3x3(entries[1],  entries[2],  entries[3],
+                                      entries[5],  entries[6],  entries[7],
+                                      entries[13], entries[14], entries[15]);
+    cof.entries[9]  = -determinant3x3(entries[0],  entries[2],  entries[3],
+                                      entries[4],  entries[6],  entries[7],
+                                      entries[12], entries[14], entries[15]);
+    cof.entries[10] =  determinant3x3(entries[0],  entries[1],  entries[3],
+                                      entries[4],  entries[5],  entries[7],
+                                      entries[12], entries[13], entries[15]);
+    cof.entries[11] = -determinant3x3(entries[0],  entries[1],  entries[2],
+                                      entries[4],  entries[5],  entries[6],
+                                      entries[12], entries[13], entries[14]);
+
+    cof.entries[12] = -determinant3x3(entries[1],  entries[2],  entries[3],
+                                      entries[5],  entries[6],  entries[7],
+                                      entries[9],  entries[10], entries[11]);
+    cof.entries[13] =  determinant3x3(entries[0],  entries[2],  entries[3],
+                                      entries[4],  entries[6],  entries[7],
+                                      entries[8],  entries[10], entries[11]);
+    cof.entries[14] = -determinant3x3(entries[0],  entries[1],  entries[3],
+                                      entries[4],  entries[5],  entries[7],
+                                      entries[8],  entries[9],  entries[11]);
+    cof.entries[15] =  determinant3x3(entries[0],  entries[1],  entries[2],
+                                      entries[4],  entries[5],  entries[6],
+                                      entries[8],  entries[9],  entries[10]);
+
+    return cof;
+}
+
+float Matrix4x4::determinant() const {
+
+    float c0 =  determinant3x3(entries[5], entries[6], entries[7], entries[9], entries[10], entries[11], entries[13], entries[14], entries[15]);
+    float c1 = -determinant3x3(entries[4], entries[6], entries[7], entries[8], entries[10], entries[11], entries[12], entries[14], entries[15]);
+    float c2 =  determinant3x3(entries[4], entries[5], entries[7], entries[8], entries[9], entries[11], entries[12], entries[13], entries[15]);
+    float c3 = -determinant3x3(entries[4], entries[5], entries[6], entries[8], entries[9], entries[10], entries[12], entries[13], entries[14]);
+
+    return entries[0] * c0 + entries[1] * c1 + entries[2] * c2 + entries[3] * c3;
+}
+
+void Matrix4x4::SetMatrixAsInvertedOfGivenMatrix4x4() {
+
+    float det = determinant();
+    if (det == 0) return;
+
+    Matrix4x4 dope = cofactor().Transpose();
+
+
+    for (int i = 0; i < 4; ++i)
+        for (int j = 0; j < 4; ++j)
+            entries[j + i * 4] = dope.entries[j + i * 4] / det;
+
+
+}
+
 void Matrix4x4::InvertMatrix() {
-    SetMatrixAsInvertedOfGivenMatrix(*this);
+    SetMatrixAsInvertedOfGivenMatrix4x4();
 }
 
 std::string Matrix4x4::print() const {
@@ -314,11 +404,10 @@ void Matrix4x4::SetTransposeOfGivenMatrix(const Matrix4x4& mat) {
 
 
 Vector Matrix4x4::operator*(const Vector &v) const {
-    // Mnożenie macierzy przez wektor 4D
     float x = entries[0] * v.getX() + entries[4] * v.getY() + entries[8] * v.getZ() + entries[12] * v.getW();
     float y = entries[1] * v.getX() + entries[5] * v.getY() + entries[9] * v.getZ() + entries[13] * v.getW();
     float z = entries[2] * v.getX() + entries[6] * v.getY() + entries[10] * v.getZ() + entries[14] * v.getW();
     float w = entries[3] * v.getX() + entries[7] * v.getY() + entries[11] * v.getZ() + entries[15] * v.getW();
 
-    return Vector(x, y, z, w);  // Zwracamy nowy wektor 4D
+    return Vector(x, y, z, w);
 }

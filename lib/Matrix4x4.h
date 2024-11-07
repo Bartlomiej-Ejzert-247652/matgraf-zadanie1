@@ -27,6 +27,7 @@ public:
     Vector operator*(const Vector &v) const;
     void LoadIdentity();
     void SetMatrixAsInvertedOfGivenMatrix(const Matrix4x4 &mat);
+    void SetMatrixAsInvertedOfGivenMatrix4x4();
     void InvertMatrix();
     Matrix4x4 Transpose() const;
     void SetTransposeOfGivenMatrix(const Matrix4x4 &mat);
@@ -44,7 +45,8 @@ public:
     void SetRotationX(const double angle);
     void SetRotationY(const double angle);
     void SetRotationZ(const double angle);
-
+    Matrix4x4 cofactor() const;
+    float determinant() const;
 };
 
 #endif //ZADANIE1_MATRIX4X4_H

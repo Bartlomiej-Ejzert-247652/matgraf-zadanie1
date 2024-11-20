@@ -9,3 +9,12 @@ Quaternion::Quaternion(float _a, float _x, float _y, float _z) {
 
 }
 
+Quaternion::Quaternion(float _a, Vector v) {
+
+    this -> a = _a;
+    this -> x = v.getX();
+    this -> y = v.getY();
+    this -> z = v.getZ();
+
+}
+

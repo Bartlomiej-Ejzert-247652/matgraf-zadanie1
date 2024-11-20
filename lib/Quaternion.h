@@ -14,6 +14,9 @@ public:
     Quaternion(float _a, float _x, float _y, float _z);
     Quaternion(float _a, Vector v);
 
+    void operator+=(const Quaternion &q);
+    void operator-=(const Quaternion &q);
+
 };
 
 #endif //ZADANIE1_QUATERNION_H

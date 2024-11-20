@@ -7,12 +7,16 @@ class Quaternion {
 
 private:
 
-    float a, x, y, z;
+    float a;
+    Vector v = Vector(0, 0, 0, 1);
 
 public:
 
     Quaternion(float _a, float _x, float _y, float _z);
     Quaternion(float _a, Vector v);
+
+    void operator+=(const Vector &v);
+    void operator-=(const Vector &v);
 
 };
 

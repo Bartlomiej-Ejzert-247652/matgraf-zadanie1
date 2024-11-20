@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 23)
 set(MAIN_FILE src/main.cpp
 
         lib/Matrix4x4.h
-        src/Matrix4x4.cpp)
+        src/Matrix4x4.cpp
+        lib/Quaternion.h
+        src/Quaternion.cpp)
 
 file(GLOB SOURCES "src/*.cpp")
 

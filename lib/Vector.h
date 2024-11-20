@@ -4,11 +4,11 @@
 #include <string>
 
 class Vector {
-private:
-
-    float x, y, z, w;
 
 public:
+    float x, y, z, w;
+
+
 
     Vector(float x, float y, float z, float w);
     Vector(float x, float y, float z);
@@ -23,6 +23,8 @@ public:
     void operator+=(const Vector &v);
     void operator-=(const Vector &v);
     void operator*=(float a);
+    Vector operator*(float a) const;
+    Vector operator+(Vector v) const;
     void operator/=(float a);
 
     float dotProduct(const Vector &v) const;

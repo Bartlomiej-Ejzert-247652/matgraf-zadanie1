@@ -137,3 +137,15 @@ bool Vector::equal(Vector &v) const {
     if (x == v.getX() && y == v.getY() && z == v.getZ()) return true;
     else return false;
 }
+
+Vector Vector::operator*(float a) const {
+    Vector temp(this->getX(), this->getY(), this->getZ(), this->getW());
+    temp *= a;
+    return temp;
+}
+
+Vector Vector::operator+(Vector v) const {
+    Vector temp(this->getX(), this->getY(), this->getZ(), this->getW());
+    temp += v;
+    return temp;
+}

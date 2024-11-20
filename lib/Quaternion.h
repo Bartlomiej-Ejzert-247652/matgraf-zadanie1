@@ -7,7 +7,8 @@ class Quaternion {
 
 private:
 
-    float a, x, y, z;
+    float a;
+    Vector v = Vector(0, 0, 0, 1);
 
 public:
 

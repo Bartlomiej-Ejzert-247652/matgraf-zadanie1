@@ -13,6 +13,7 @@ public:
     Vector(float x, float y, float z, float w);
     Vector(float x, float y, float z);
     Vector(float x, float y);
+    //Vector() {}
 
     float getX() const;
     float getY() const;

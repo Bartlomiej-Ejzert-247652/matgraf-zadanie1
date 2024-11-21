@@ -141,9 +141,9 @@ int main() {
 
     Quaternion divideA(1, 2, 3, 4);
     Quaternion divideB(4, 4, 3, 4);
-    divideA/=divideB;
+    Quaternion resDiv = divideA/divideB;
 
-    cout << "To jest [1, 2, 3, 4] : [4, 4, 3, 4]: " << divideA.print() << endl;
+    cout << "To jest [1, 2, 3, 4] : [4, 4, 3, 4]: " << resDiv.print() << endl;
 
     cout << endl;
     cout << "========" << endl;

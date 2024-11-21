@@ -19,12 +19,15 @@ public:
     void operator-=(const Quaternion &q);
     void operator*=(const Quaternion &q);
     Quaternion operator*(const Quaternion &q);
-    void operator/=(const Quaternion &q);
+    Quaternion operator/(Quaternion &q);
 
     Vector rotate(Vector& v);
     void prepareRotation(Vector& axis, float angle);
     void normalise();
     Quaternion inverse();
+    float normSquare();
+    Quaternion inversion();
+
 
     std::string print() const;
 

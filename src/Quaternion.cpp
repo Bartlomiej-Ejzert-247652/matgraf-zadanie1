@@ -65,13 +65,9 @@ void Quaternion::operator*=(const Quaternion &q) {
     *this = *this * q;
 }
 
-void Quaternion::operator/=(const Quaternion &q) {
-    if ((q.getA() * q.getA() + q.getV().dotProduct(q.getV())) != 0) {
-        this->a = a * q.getA() + v.dotProduct(q.getV()) / (q.getA() * q.getA() + q.getV().dotProduct(q.getV()));
-        this->v = (q.getV() * (-a) + (v * q.getA() + (v.crossProduct(q.getV()) * (-1)))) * (1 / (q.getA() * q.getA() + q.getV().dotProduct(q.getV())));
-    } else {
-        return;
-    }
+Quaternion Quaternion::operator/(Quaternion &q) {
+
+    return (*this) * q.inversion();
 }
 
 Vector Quaternion::rotate(Vector& v) {
@@ -99,7 +95,6 @@ Quaternion Quaternion::inverse() {
 }
 
 
-
 std::string Quaternion::print() const {
     std::string s = "[ ";
     s += std::to_string(a) + ", ";
@@ -107,5 +102,23 @@ std::string Quaternion::print() const {
     s += std::to_string(v.getY()) + ", ";
     s += std::to_string(v.getZ()) + "]";
     return s;
+}
+
+float Quaternion::normSquare() {
+    return a * a + v.x * v.x + v.y * v.y + v.z * v.z;
+}
+
+Quaternion Quaternion::inversion() {
+    Quaternion q = (*this).inverse();
+    float norm = normSquare();
+    if (norm != 0) {
+        q.a /= norm;
+        q.v.x /= norm;
+        q.v.y /= norm;
+        q.v.z /= norm;
+        return q;
+    } else {
+        return Quaternion(1, 1, 1, 1);
+    }
 }
 

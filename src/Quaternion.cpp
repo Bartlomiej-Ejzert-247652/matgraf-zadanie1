@@ -66,9 +66,9 @@ void Quaternion::operator*=(const Quaternion &q) {
 }
 
 void Quaternion::operator/=(const Quaternion &q) {
-    if ((q.getA() * q.getA() + q.getV().dotProduct(v)) != 0) {
-        this->a = a * q.getA() + v.dotProduct(q.getV()) / (q.getA() * q.getA() + q.getV().dotProduct(v));
-        this->v = (q.getV() * (-a) + (v * q.getA() + (v.crossProduct(q.getV()) * (-1)))) * (1 / (q.getA() * q.getA() + q.getV().dotProduct(v)));
+    if ((q.getA() * q.getA() + q.getV().dotProduct(q.getV())) != 0) {
+        this->a = a * q.getA() + v.dotProduct(q.getV()) / (q.getA() * q.getA() + q.getV().dotProduct(q.getV()));
+        this->v = (q.getV() * (-a) + (v * q.getA() + (v.crossProduct(q.getV()) * (-1)))) * (1 / (q.getA() * q.getA() + q.getV().dotProduct(q.getV())));
     } else {
         return;
     }

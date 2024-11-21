@@ -125,7 +125,10 @@ int main() {
     cout << "To jest b * a " << (b * a).print() << endl;
 
     Quaternion q1(1, 0, 0, 0);
-    
+
+
+
+
     cout << endl;
     cout << "========" << endl;
     cout << endl;

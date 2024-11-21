@@ -137,7 +137,13 @@ int main() {
     cout << "To jest b * a " << (b * a).print() << endl;
 
     Quaternion q1(1, 0, 0, 0);
-    
+
+    Quaternion divideA(1, 2, 3, 4);
+    Quaternion divideB(4, 4, 3, 4);
+    divideA/=divideB;
+
+    cout << "To jest [1, 2, 3, 4] : [4, 4, 3, 4]: " << divideA.print() << endl;
+
     cout << endl;
     cout << "========" << endl;
     cout << endl;

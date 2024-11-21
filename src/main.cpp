@@ -120,6 +120,18 @@ int main() {
     Quaternion a(1, 2, 3, 4);
     Quaternion b(5, 6, 7, 8);
 
+    Quaternion addA(1, 2, 3, 4);
+    Quaternion addB(5, 6, 7, 8);
+    addA+=addB;
+
+    cout << "To jest [1, 2, 3, 4] + [5, 6, 7, 8]: " << addA.print() << endl;
+
+    Quaternion subtractA(1, 2, 3, 4);
+    Quaternion subtractB(5, 6, 7, 8);
+    subtractB -= subtractA;
+
+    cout << "To jest [5, 6, 7, 8] - [1, 2, 3, 4]: " << subtractB.print() << endl;
+
     cout << "To jest a * b " << (a * b).print() << endl;
 
     cout << "To jest b * a " << (b * a).print() << endl;
@@ -132,8 +144,8 @@ int main() {
 
     for (int i = 0; i < 360; i+=90) {
 
-        Vector v1(-1, -1, 0);
-        Vector axis(0, 0, 1);
+        Vector v1(-1, -1, -1);
+        Vector axis(1, 0, 0);
 
         q1.prepareRotation(axis, float(i) * std::numbers::pi_v<float> / 180.0f);
 

@@ -76,7 +76,14 @@ void Vector::operator/=(float a) {
 // Printing vector to console for debugging
 
 std::string Vector::print() const {
-    std::string s = "[ ";
+    std::string s = "";
+    if (w == 0) {
+        s += "Punkt: ";
+    } else if (w == 1) {
+        s += "Wektor: ";
+    }
+
+    s += "[ ";
     s += std::to_string(x) + ", ";
     s += std::to_string(y) + ", ";
     s += std::to_string(z) + ", ";

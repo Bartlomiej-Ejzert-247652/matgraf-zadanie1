@@ -2,6 +2,7 @@
 #include "Vector.h"
 #include "Matrix4x4.h"
 #include "Quaternion.h"
+#include "Line.h"
 
 using namespace std;
 
@@ -117,50 +118,64 @@ int main() {
 //    cout << "m5 * m6 " << endl << m7.print() << endl;
 //    cout << "m6 * m5 " << endl << m8.print() << endl;
 
-    Quaternion a(1, 2, 3, 4);
-    Quaternion b(5, 6, 7, 8);
+//    Quaternion a(1, 2, 3, 4);
+//    Quaternion b(5, 6, 7, 8);
+//
+//    Quaternion addA(1, 2, 3, 4);
+//    Quaternion addB(5, 6, 7, 8);
+//    addA+=addB;
+//
+//    cout << "To jest [1, 2, 3, 4] + [5, 6, 7, 8]: " << addA.print() << endl;
+//
+//    Quaternion subtractA(1, 2, 3, 4);
+//    Quaternion subtractB(5, 6, 7, 8);
+//    subtractB -= subtractA;
+//
+//    cout << "To jest [5, 6, 7, 8] - [1, 2, 3, 4]: " << subtractB.print() << endl;
+//
+//    cout << "To jest a * b " << (a * b).print() << endl;
+//
+//    cout << "To jest b * a " << (b * a).print() << endl;
+//
+//    Quaternion q1(1, 0, 0, 0);
+//
+//
+//    Quaternion divideA(1, 2, 3, 4);
+//    Quaternion divideB(4, 4, 3, 4);
+//    Quaternion resDiv = divideA/divideB;
+//
+//    cout << "To jest [1, 2, 3, 4] : [4, 4, 3, 4]: " << resDiv.print() << endl;
+//
+//    cout << endl;
+//    cout << "========" << endl;
+//    cout << endl;
+//
+//    for (int i = 0; i < 360; i+=90) {
+//
+//        Vector v1(-1, -1, -1);
+//        Vector axis(1, 0, 0);
+//
+//        q1.prepareRotation(axis, float(i) * std::numbers::pi_v<float> / 180.0f);
+//
+//        Vector v = q1.rotate(v1);
+//
+//        cout << i << ": " << v.print() << endl;
+//        cout << endl;
+//    }
 
-    Quaternion addA(1, 2, 3, 4);
-    Quaternion addB(5, 6, 7, 8);
-    addA+=addB;
+    Vector p0 = Vector(0, 0, 0, 0);
+    Vector p1 = Vector(1, 1, 0, 0);
 
-    cout << "To jest [1, 2, 3, 4] + [5, 6, 7, 8]: " << addA.print() << endl;
+    Line line = Line(p0, p1, 0);
 
-    Quaternion subtractA(1, 2, 3, 4);
-    Quaternion subtractB(5, 6, 7, 8);
-    subtractB -= subtractA;
+    std::cout << line.GetValue(2).print() << std::endl;
 
-    cout << "To jest [5, 6, 7, 8] - [1, 2, 3, 4]: " << subtractB.print() << endl;
+    Line line1 = Line( Vector(-2, 5, 0),Vector(3, 1, 5), 1);
+    Line line2 = Line( Vector(-2, 4, 0),Vector(1, -5, 3), 1);
 
-    cout << "To jest a * b " << (a * b).print() << endl;
+    std::cout << "Punkt przeciecia: " << line1.CrossPoint(line2).print() << std::endl;
 
-    cout << "To jest b * a " << (b * a).print() << endl;
-
-    Quaternion q1(1, 0, 0, 0);
-
-
-    Quaternion divideA(1, 2, 3, 4);
-    Quaternion divideB(4, 4, 3, 4);
-    Quaternion resDiv = divideA/divideB;
-
-    cout << "To jest [1, 2, 3, 4] : [4, 4, 3, 4]: " << resDiv.print() << endl;
-
-    cout << endl;
-    cout << "========" << endl;
-    cout << endl;
-
-    for (int i = 0; i < 360; i+=90) {
-
-        Vector v1(-1, -1, -1);
-        Vector axis(1, 0, 0);
-
-        q1.prepareRotation(axis, float(i) * std::numbers::pi_v<float> / 180.0f);
-
-        Vector v = q1.rotate(v1);
-
-        cout << i << ": " << v.print() << endl;
-        cout << endl;
-    }
+    std::cout << "Kat w stopniach pomiedzy prostymi: " << line1.AngleLines(line2) << std::endl;
 
     return 0;
 }

@@ -8,7 +8,9 @@ set(MAIN_FILE src/main.cpp
         lib/Matrix4x4.h
         src/Matrix4x4.cpp
         lib/Quaternion.h
-        src/Quaternion.cpp)
+        src/Quaternion.cpp
+        src/Line.cpp
+        lib/Line.h)
 
 file(GLOB SOURCES "src/*.cpp")
 

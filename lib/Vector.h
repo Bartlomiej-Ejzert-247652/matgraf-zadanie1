@@ -36,6 +36,9 @@ public:
     float angleDegrees(Vector &v) const;
     bool equal(Vector &v) const;
     std::string print() const;
+
+
+
 };
 
 #endif //ZAD1_VECTOR_H

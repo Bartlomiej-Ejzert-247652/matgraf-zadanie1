@@ -26,15 +26,14 @@ Vector Line::CrossPoint(Line& l) {
 
     Vector w = Vector(l.p.x - p.x, l.p.y - p.y, l.p.z - p.z, 1);
 
-    // Tworzymy macierz i obliczamy wyznaczniki
+
     float denom = v.x * l.v.y - v.y * l.v.x;
     float t = 0;
-    // Sprawdzamy, czy prostą są równoległe (jeśli wyznacznik jest 0, prostą są równoległe)
+
     if (denom == 0) {
 
         float denomZ = v.x * l.v.z - v.z * l.v.x;
         t = (w.x * l.v.z - w.z * l.v.x) / denomZ;
-          // Zwracamy pusty wektor (brak przecięcia)
     } else {
         t = (w.x * l.v.y - w.y * l.v.x) / denom;
     }
@@ -56,6 +55,37 @@ std::string Line::print() {
     s += v.print();
     s += " ]";
     return s;
+}
+
+std::vector<Vector> Line::CrossSphere(Sphere& sphere) {
+
+
+    Vector w = Vector(p.x - sphere.centre.x, p.y - sphere.centre.y, p.z - sphere.centre.z, 1);
+
+    float A = v.x * v.x + v.y * v.y + v.z * v.z;
+    float B = 2 * (w.x * v.x + w.y * v.y + w.z * v.z);
+    float C = w.x * w.x + w.y * w.y + w.z * w.z - sphere.radius * sphere.radius;
+
+    // delta
+    float discriminant = B * B - 4 * A * C;
+
+    std::vector<Vector> crossPoints;
+
+    if (discriminant < 0) {
+        // Brak punktów przecięcia
+        return crossPoints;
+    }
+
+    float sqrtDiscriminant = std::sqrt(discriminant);
+    float t1 = (-B - sqrtDiscriminant) / (2 * A);
+    float t2 = (-B + sqrtDiscriminant) / (2 * A);
+
+    crossPoints.push_back(GetValue(t1));
+    if (discriminant > 0) {
+        crossPoints.push_back(GetValue(t2));
+    }
+
+    return crossPoints;
 }
 
 

@@ -201,5 +201,14 @@ int main() {
 
     std::cout << "Punkt przeciecia odcinkow " << odcinekB.CrossPoint(odcinekA).print() << std::endl;
 
+    Sphere sphere = Sphere(sqrt(26), Vector(0, 0, 0, 0));
+    Line sphereLine = Line(Vector(3, -1, 2, 0), Vector(5, 3, -4, 0), 0);
+
+    std::vector<Vector> points = sphereLine.CrossSphere(sphere);
+
+    for (int i = 0; i < points.size(); i++) {
+        std::cout << "Punkt przeciecia " << i << ": " << points.at(i).print() << std::endl;
+    }
+
     return 0;
 }

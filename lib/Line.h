@@ -3,6 +3,9 @@
 //
 
 #include "Vector.h"
+
+#include "Sphere.h"
+#include <vector>
 #include <cmath>
 
 #ifndef ZADANIE1_LINE_H
@@ -22,6 +25,7 @@ public:
     Vector GetValue(float t);
 
     std::string print();
+    std::vector<Vector> CrossSphere(Sphere& sphere);
 };
 
 

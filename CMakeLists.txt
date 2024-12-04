@@ -12,7 +12,9 @@ set(MAIN_FILE src/main.cpp
         src/Line.cpp
         lib/Line.h
         src/Surface.cpp
-        lib/Surface.h)
+        lib/Surface.h
+        src/Sphere.cpp
+        lib/Sphere.h)
 
 file(GLOB SOURCES "src/*.cpp")
 

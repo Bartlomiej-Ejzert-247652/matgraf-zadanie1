@@ -23,32 +23,39 @@ Vector Line::GetValue(float t) {
 }
 
 Vector Line::CrossPoint(Line& l) {
-    // Układ równań parametrycznych:
-    // p1 + t1 * v1 = p2 + t2 * v2
-    // Rozpisz to na komponenty
-    float a1 = v.x, b1 = -l.v.x, c1 = l.p.x - p.x;
-    float a2 = v.y, b2 = -l.v.y, c2 = l.p.y - p.y;
-    float a3 = v.z, b3 = -l.v.z, c3 = l.p.z - p.z;
 
-    // Rozwiąż układ równań dla t1 i t2
-    float detXY = a1 * b2 - a2 * b1;
+    Vector w = Vector(l.p.x - p.x, l.p.y - p.y, l.p.z - p.z, 1);
 
-    if (fabs(detXY) < 1e-6) {
-        std::cerr << "Blad" << std::endl;
-        return Vector(0, 0, 0, 0);
+    // Tworzymy macierz i obliczamy wyznaczniki
+    float denom = v.x * l.v.y - v.y * l.v.x;
+    float t = 0;
+    // Sprawdzamy, czy prostą są równoległe (jeśli wyznacznik jest 0, prostą są równoległe)
+    if (denom == 0) {
+
+        float denomZ = v.x * l.v.z - v.z * l.v.x;
+        t = (w.x * l.v.z - w.z * l.v.x) / denomZ;
+          // Zwracamy pusty wektor (brak przecięcia)
+    } else {
+        t = (w.x * l.v.y - w.y * l.v.x) / denom;
     }
+    return GetValue(t);
 
-    float t1 = (c1 * b2 - c2 * b1) / detXY;
-    float t2 = (a1 * c2 - a2 * c1) / detXY;
-
-
-
-    // Zwróć punkt przecięcia (używając dowolnej z prostych)
-    return GetValue(t1);
 }
 
 float Line::AngleLines(Line &l) {
     return v.angleDegrees(l.v);
+}
+
+std::string Line::print() {
+    std::string s = "Line: ";
+
+
+    s += "[ ";
+    s += p.print();
+    s += "\n";
+    s += v.print();
+    s += " ]";
+    return s;
 }
 
 

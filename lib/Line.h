@@ -20,6 +20,8 @@ public:
     float AngleLines(Line& l);
 
     Vector GetValue(float t);
+
+    std::string print();
 };
 
 

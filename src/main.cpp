@@ -3,6 +3,7 @@
 #include "Matrix4x4.h"
 #include "Quaternion.h"
 #include "Line.h"
+#include "Surface.h"
 
 using namespace std;
 
@@ -176,6 +177,29 @@ int main() {
     std::cout << "Punkt przeciecia: " << line1.CrossPoint(line2).print() << std::endl;
 
     std::cout << "Kat w stopniach pomiedzy prostymi: " << line1.AngleLines(line2) << std::endl;
+
+    Line linesurface = Line(Vector(-2, 2, -1, 0), Vector(3, -1, 2, 1), 1);
+    Surface surface = Surface(2, 3, 3, -8);
+
+    std::cout << surface.CrossPoint(linesurface).print() << endl;
+
+    std::cout << "Kat w stopniach pomiedzy prosta a surface: " << surface.AngleLineSurface(linesurface) << std::endl;
+
+    Surface s1 = Surface(2, -1, 1, -8);
+    Surface s2 = Surface(4, 3, 1, 14);
+
+    std::cout << "Linia przecinajacych plaszczyzn " << s1.CrossLine(s2).print()<< std::endl;
+    std::cout << "Kat w stopniach pomiedzy surface a surface: " << s1.AngleSurfaceSurface(s2) << std::endl;
+
+    Vector A = Vector(5, 5, 4, 0);
+    Vector Aprim = Vector(10, 10, 6, 0);
+    Vector B = Vector(5, 5, 5, 0);
+    Vector Bprim = Vector(10, 10, 3, 0);
+
+    Line odcinekA = Line(A, Aprim, 0);
+    Line odcinekB = Line(B, Bprim, 0);
+
+    std::cout << "Punkt przeciecia odcinkow " << odcinekB.CrossPoint(odcinekA).print() << std::endl;
 
     return 0;
 }

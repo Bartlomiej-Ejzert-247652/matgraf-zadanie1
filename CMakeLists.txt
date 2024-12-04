@@ -10,7 +10,9 @@ set(MAIN_FILE src/main.cpp
         lib/Quaternion.h
         src/Quaternion.cpp
         src/Line.cpp
-        lib/Line.h)
+        lib/Line.h
+        src/Surface.cpp
+        lib/Surface.h)
 
 file(GLOB SOURCES "src/*.cpp")
 

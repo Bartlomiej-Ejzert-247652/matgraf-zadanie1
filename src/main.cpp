@@ -169,27 +169,27 @@ int main() {
 
     Line line = Line(p0, p1, 0);
 
-    std::cout << line.GetValue(2).print() << std::endl;
+    //std::cout << line.GetValue(2).print() << std::endl;
 
-    Line line1 = Line( Vector(-2, 5, 0),Vector(3, 1, 5), 1);
+    Line line1 = Line( Vector(-2, 4, 0),Vector(3, 1, 5), 1);
     Line line2 = Line( Vector(-2, 4, 0),Vector(1, -5, 3), 1);
 
-    std::cout << "Punkt przeciecia: " << line1.CrossPoint(line2).print() << std::endl;
+    std::cout << "1. Punkt przeciecia: " << line1.CrossPoint(line2).print() << std::endl;
 
-    std::cout << "Kat w stopniach pomiedzy prostymi: " << line1.AngleLines(line2) << std::endl;
+    std::cout << "2. Kat w stopniach pomiedzy prostymi: " << line1.AngleLines(line2) << std::endl;
 
     Line linesurface = Line(Vector(-2, 2, -1, 0), Vector(3, -1, 2, 1), 1);
     Surface surface = Surface(2, 3, 3, -8);
 
-    std::cout << surface.CrossPoint(linesurface).print() << endl;
+    std::cout << "3. Przeciecie prostej z powierzchnia: " << surface.CrossPoint(linesurface).print() << endl;
 
-    std::cout << "Kat w stopniach pomiedzy prosta a surface: " << surface.AngleLineSurface(linesurface) << std::endl;
+    std::cout << "4. Kat w stopniach pomiedzy prosta a surface: " << surface.AngleLineSurface(linesurface) << std::endl;
 
     Surface s1 = Surface(2, -1, 1, -8);
     Surface s2 = Surface(4, 3, 1, 14);
 
-    std::cout << "Linia przecinajacych plaszczyzn " << s1.CrossLine(s2).print()<< std::endl;
-    std::cout << "Kat w stopniach pomiedzy surface a surface: " << s1.AngleSurfaceSurface(s2) << std::endl;
+    std::cout << "5. Linia przecinajacych plaszczyzn " << s1.CrossLine(s2).print()<< std::endl;
+    std::cout << "6. Kat w stopniach pomiedzy surface a surface: " << s1.AngleSurfaceSurface(s2) << std::endl;
 
     Vector A = Vector(5, 5, 4, 0);
     Vector Aprim = Vector(10, 10, 6, 0);
@@ -199,12 +199,14 @@ int main() {
     Line odcinekA = Line(A, Aprim, 0);
     Line odcinekB = Line(B, Bprim, 0);
 
-    std::cout << "Punkt przeciecia odcinkow " << odcinekB.CrossPoint(odcinekA).print() << std::endl;
+    std::cout << "7. Punkt przeciecia odcinkow " << odcinekB.CrossPoint(odcinekA).print() << std::endl;
 
     Sphere sphere = Sphere(sqrt(26), Vector(0, 0, 0, 0));
     Line sphereLine = Line(Vector(3, -1, 2, 0), Vector(5, 3, -4, 0), 0);
 
     std::vector<Vector> points = sphereLine.CrossSphere(sphere);
+
+    std::cout<<"8. ";
 
     for (int i = 0; i < points.size(); i++) {
         std::cout << "Punkt przeciecia " << i << ": " << points.at(i).print() << std::endl;

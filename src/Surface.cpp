@@ -48,7 +48,7 @@ Vector Surface::CrossPointOnLine(Surface& s) {
 
     float detXY = a1 * b2 - a2 * b1;
 
-    if (fabs(detXY) < 1e-6) {
+    if (fabs(detXY) < 0.000001) {
 
         float y = 0;
 

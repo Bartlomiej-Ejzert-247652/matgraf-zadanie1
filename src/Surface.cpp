@@ -3,6 +3,7 @@
 //
 
 #include "Surface.h"
+#include <iostream>
 
 Surface::Surface(float a, float b, float c, float d) {
     this->a = a;
@@ -18,8 +19,13 @@ Vector Surface::CrossPoint(Line &l) {
 
     float t = 0;
 
+
+
     if (fabs(mianownik) > 0.00001) {
         t = - (a * l.p.x + b * l.p.y + c * l.p.z + d) / mianownik;
+    } else {
+        std::cerr << "Linia sie nie przecina z plaszczyzna lub jest nieskonczenie wiele przeciec" << std::endl;
+        return {0, 0, 0, 0};
     }
 
     return l.GetValue(t);

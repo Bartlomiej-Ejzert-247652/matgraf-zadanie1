@@ -212,5 +212,6 @@ int main() {
         std::cout << "Punkt przeciecia " << i << ": " << points.at(i).print() << std::endl;
     }
 
+
     return 0;
 }

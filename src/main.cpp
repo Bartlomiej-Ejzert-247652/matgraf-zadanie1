@@ -4,6 +4,8 @@
 #include "Quaternion.h"
 #include "Line.h"
 #include "Surface.h"
+#include "Cube.h"
+#include "Camera.h"
 
 using namespace std;
 
@@ -164,7 +166,7 @@ int main() {
 //        cout << endl;
 //    }
 
-    Vector p0 = Vector(0, 0, 0, 0);
+    /*Vector p0 = Vector(0, 0, 0, 0);
     Vector p1 = Vector(1, 1, 0, 0);
 
     Line line = Line(p0, p1, 0);
@@ -210,8 +212,16 @@ int main() {
 
     for (int i = 0; i < points.size(); i++) {
         std::cout << "Punkt przeciecia " << i << ": " << points.at(i).print() << std::endl;
-    }
+    }*/
 
+    Cube cube = Cube(1);
+
+    Camera camera = Camera(0, 0, -5, 0, 0, 1, 0, 1, 0);
+
+    camera.rayTrace(cube);
+    std::string render = camera.render();
+
+    std::cout << render;
 
     return 0;
 }

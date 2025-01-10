@@ -16,8 +16,6 @@ Line::Line(Vector punkt0, Vector punkt1, bool flaga) {
 
 }
 
-
-
 Vector Line::GetValue(float t) {
     return p + v * t;
 }
@@ -46,19 +44,18 @@ float Line::AngleLines(Line &l) {
 }
 
 std::string Line::print() {
+
     std::string s = "Line: ";
-
-
     s += "[ ";
     s += p.print();
     s += "\n";
     s += v.print();
     s += " ]";
     return s;
+
 }
 
 std::vector<Vector> Line::CrossSphere(Sphere& sphere) {
-
 
     Vector w = Vector(p.x - sphere.centre.x, p.y - sphere.centre.y, p.z - sphere.centre.z, 1);
 
@@ -87,5 +84,3 @@ std::vector<Vector> Line::CrossSphere(Sphere& sphere) {
 
     return crossPoints;
 }
-
-

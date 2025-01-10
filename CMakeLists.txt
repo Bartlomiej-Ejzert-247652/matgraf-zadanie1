@@ -14,7 +14,10 @@ set(MAIN_FILE src/main.cpp
         src/Surface.cpp
         lib/Surface.h
         src/Sphere.cpp
-        lib/Sphere.h)
+        lib/Sphere.h
+        lib/Camera.h
+        src/Camera.cpp
+        lib/Cube.h)
 
 file(GLOB SOURCES "src/*.cpp")
 

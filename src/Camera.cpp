@@ -19,7 +19,7 @@ void Camera::rayTrace(Cube cube) {
 
             double u = (x / (double)(SIZE - 1)) * 2 - 1; // Zakres od -1 do 1
             double v = (y / (double)(SIZE - 1)) * 2 - 1; // Zakres od -1 do 1
-            Vector point_on_plane(u, v, 4000);
+            Vector point_on_plane(u, v, 1);
             rotationMatrix.SetRotationX(yaw);
             point_on_plane = rotationMatrix * point_on_plane;
             rotationMatrix.SetRotationY(pitch);
@@ -82,4 +82,8 @@ void Camera::rotato(float x, float y, float z) {
     yaw = x;
     pitch = y;
     roll = z;
+}
+
+void Camera::zoomo(float zoom) {
+    position.z = zoom;
 }

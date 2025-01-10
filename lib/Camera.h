@@ -57,6 +57,8 @@ public:
 
     std::string render();
 
+    void zoomo(float zoom);
+
 };
 
 #endif //ZADANIE1_CAMERA_H

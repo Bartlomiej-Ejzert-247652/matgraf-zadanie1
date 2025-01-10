@@ -216,7 +216,9 @@ int main() {
 
     Cube cube = Cube(1);
 
-    Camera camera = Camera(0, 0, -5, 0, 0, 1, 0, 1, 0);
+    Camera camera = Camera(0, 0, -4000, 0, 0, 1, 0, 1, 0);
+
+    camera.rotato(45, 45, 0);
 
     camera.rayTrace(cube);
     std::string render = camera.render();

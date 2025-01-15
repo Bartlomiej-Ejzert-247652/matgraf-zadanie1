@@ -14,19 +14,25 @@ void Camera::rayTrace(Cube cube) {
     position = rotationMatrix * position;
     direction = rotationMatrix * direction;
 
+    direction.normalise();
+
     for(int y = 0; y < SIZE; ++y) {
         for(int x = 0; x < SIZE; ++x) {
 
             double u = (x / (double)(SIZE - 1)) * 2 - 1; // Zakres od -1 do 1
             double v = (y / (double)(SIZE - 1)) * 2 - 1; // Zakres od -1 do 1
-            Vector point_on_plane(u, v, 1);
+            Vector point_on_plane(u, v, position.z - 1);
             rotationMatrix.SetRotationX(yaw);
             point_on_plane = rotationMatrix * point_on_plane;
             rotationMatrix.SetRotationY(pitch);
             point_on_plane = rotationMatrix * point_on_plane;
             rotationMatrix.SetRotationZ(roll);
             point_on_plane = rotationMatrix * point_on_plane;
-            Line ray(this->position, point_on_plane, false);
+
+            Vector _direction = point_on_plane;
+            _direction -= position;
+            _direction.normalise();
+            Line ray(this->position, _direction, true);
             isVisible[x][y] = intersection(ray, cube);
 
         }

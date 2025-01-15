@@ -22,9 +22,11 @@ public:
 
     void operator+=(const Vector &v);
     void operator-=(const Vector &v);
+
     void operator*=(float a);
     Vector operator*(float a) const;
     Vector operator+(Vector v) const;
+    Vector operator-(Vector v) const;
     void operator/=(float a);
 
     float dotProduct(const Vector &v) const;

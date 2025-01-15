@@ -156,3 +156,7 @@ Vector Vector::operator+(Vector v) const {
     temp += v;
     return temp;
 }
+
+Vector Vector::operator-(Vector v) const {
+    return {getX() - v.getX(), getY() - v.getY(), getZ() - v.getZ(), 1};
+}
